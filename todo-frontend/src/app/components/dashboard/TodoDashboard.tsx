@@ -8,23 +8,34 @@ import addTodo from "@/app/networking/todo/addTodo";
 import Button from "../atoms/dashboard/Button";
 import Header from "../header/Header";
 
-const TodoDashboard: React.FC<{ token: string }> = ({ token }) => {
+const TodoDashboard: React.FC = () => {
   const [todos, setTodos] = React.useState<any>([]);
   const [inputValue, setInputValue] = React.useState("");
   const [loading, setLoading] = React.useState(true);
   const isAdmin = localStorage.getItem("isAdmin") || "false";
+  const [token, setToken] = React.useState<string>();
+
+  useEffect(() => {
+    const token =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("token")
+        : null;
+    if (token) {
+      setToken(token);
+    }
+  }, []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
   const handleAddTodo = async () => {
-    if(!inputValue) {
+    if (!inputValue) {
       alert("Please enter a todo item");
       return;
     }
 
-    const data = await addTodo(token, inputValue, "Pending");
+    const data = await addTodo(token!, inputValue, "Pending");
     setTodos(data);
     setTimeout(() => {
       setInputValue("");
@@ -53,13 +64,15 @@ const TodoDashboard: React.FC<{ token: string }> = ({ token }) => {
     <div>
       <Header />
       <h1 className="text-[32px] p-2 text-[#000000b3]">Todo List</h1>
-      {isAdmin == 'false' && <div className="flex items-center justify-between p-4 gap-2">
-        <AddTodoInput
-          handleInputChange={handleInputChange}
-          value={inputValue}
-        />
-        <Button label="Add" handleClick={handleAddTodo} />
-      </div>}
+      {isAdmin == "false" && (
+        <div className="flex items-center justify-between p-4 gap-2">
+          <AddTodoInput
+            handleInputChange={handleInputChange}
+            value={inputValue}
+          />
+          <Button label="Add" handleClick={handleAddTodo} />
+        </div>
+      )}
 
       {loading && <p className="text-[22px] text-center mt-12">Loading...</p>}
 
@@ -70,7 +83,7 @@ const TodoDashboard: React.FC<{ token: string }> = ({ token }) => {
       {!loading && todos.length > 0 && (
         <div className="h-[500px] overflow-y-auto">
           <TodoLists todoLists={todos} refreshTodo={fetchTodos} />
-          </div>
+        </div>
       )}
     </div>
   );

@@ -1,15 +1,23 @@
 "use client"
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import Login from "../components/login/Login";
+import { useEffect } from "react";
 
 const Page = () => {
   // const cookieStore = cookies();
-  const token = localStorage.getItem("token");
+  const router = useRouter();
 
-  if (token) {
-    redirect("/");
-  }
+  useEffect(() => {
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    if (token) {
+      router.push("/");
+    }
+  }, []);
+  // const token = localStorage?.getItem("token");
+
+  // if (token) {
+  //   redirect("/");
+  // }
   return <Login />;
 };
 
