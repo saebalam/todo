@@ -30,7 +30,12 @@ authRouter.post("/api/auth/login", async (req, res) => {
 
   const token = jwt.sign({ user_id: user.user_id }, process.env.JWT_SECRET);
   res
-    .cookie("token", token, { httpOnly: true, secure: true, sameSite: "None" })
+    .cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    })
     .json({
       message: "login success",
       token,
