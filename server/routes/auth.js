@@ -29,12 +29,14 @@ authRouter.post("/api/auth/login", async (req, res) => {
   }
 
   const token = jwt.sign({ user_id: user.user_id }, process.env.JWT_SECRET);
-  res.cookie("token", token).json({
-    message: "login success",
-    token,
-    username: user.username,
-    isAdmin: user.role === "admin",
-  });
+  res
+    .cookie("token", token, { httpOnly: true, secure: true, sameSite: "None" })
+    .json({
+      message: "login success",
+      token,
+      username: user.username,
+      isAdmin: user.role === "admin",
+    });
 });
 
 authRouter.post("/api/auth/signup", async (req, res) => {
