@@ -1,5 +1,5 @@
 const logout = async (): Promise<any> => {
-    const response = await fetch("http://localhost:5000/api/auth/logout", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logout`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

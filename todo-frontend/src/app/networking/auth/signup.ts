@@ -9,7 +9,7 @@ interface SignupResponse {
 }
 
 const signup = async (username:string,email: string, password: string): Promise<SignupResponse> => {
-    const response = await fetch("http://localhost:5000/api/auth/signup", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/signup`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
