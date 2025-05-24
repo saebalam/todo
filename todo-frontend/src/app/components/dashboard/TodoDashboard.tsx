@@ -16,7 +16,6 @@ const TodoDashboard: React.FC<{ token: string }> = ({ token }) => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
-    console.log(event.target.value);
   };
 
   const handleAddTodo = async () => {
@@ -39,7 +38,6 @@ const TodoDashboard: React.FC<{ token: string }> = ({ token }) => {
       if (data) {
         setTodos(data);
       }
-      console.log("Fetched todos:", data);
     } catch (error) {
       console.error("Error fetching todos:", error);
     } finally {
@@ -70,7 +68,9 @@ const TodoDashboard: React.FC<{ token: string }> = ({ token }) => {
       )}
 
       {!loading && todos.length > 0 && (
-        <TodoLists todoLists={todos} refreshTodo={fetchTodos} />
+        <div className="h-[500px] overflow-y-auto">
+          <TodoLists todoLists={todos} refreshTodo={fetchTodos} />
+          </div>
       )}
     </div>
   );

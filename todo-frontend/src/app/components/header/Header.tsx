@@ -9,10 +9,8 @@ const Header = () => {
   const username = localStorage.getItem("username");
   const isAdmin = localStorage.getItem("isAdmin");
 
-  console.log("isAdmin", isAdmin);
   const handleLogout = async () => {
     const data = await logout();
-    console.log(data);
     if (data?.success) {
       router.push("/login");
     }

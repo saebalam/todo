@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { use, useState } from "react";
+import {  useState } from "react";
 import signup from "../networking/auth/signup";
 import { useRouter } from "next/navigation";
 
@@ -18,13 +18,12 @@ const Signup = () => {
       localStorage.setItem("username", data.username);
       router.push("/");
     }
-    console.log(data);
   };
 
   return (
-    <div>
+    <div className="p-4">
       <h1 className="text-center text-[32px]">Signup</h1>
-      <form>
+      <form className="mt-6" >
         <div className="flex flex-col gap-4 max-w-[400px] mx-auto">
           <input
             type="text"

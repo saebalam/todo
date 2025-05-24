@@ -2,7 +2,7 @@
 
 import login from "@/app/networking/auth/login";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Login = () => {
@@ -15,7 +15,6 @@ const Login = () => {
     const data = await login(email, password);
     localStorage.setItem("username", data.username);
     localStorage.setItem("isAdmin", data.isAdmin);
-    console.log("Login data:", data);
     if (data?.token) {
       router.push("/");
     }else{
@@ -24,9 +23,9 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="p-4">
       <h1 className="text-center text-[32px]">Login</h1>
-      <form>
+      <form className="mt-6">
         <div className="flex flex-col gap-4 max-w-[400px] mx-auto">
           <input
             type="email"

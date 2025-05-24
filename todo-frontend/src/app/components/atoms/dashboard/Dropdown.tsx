@@ -12,7 +12,7 @@ const Dropdown: React.FC<DropdownProps> = ({ label, options, selected, onChange 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative inline-block w-48">
+    <div className="relative inline-block max-w-48">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -23,8 +23,8 @@ const Dropdown: React.FC<DropdownProps> = ({ label, options, selected, onChange 
             <Image
               src="/images/ic_chevron.svg"
               alt="Arrow"
-              width={16}
-              height={16}
+              width={14}
+              height={14}
             className="inline-block ml-2"
             />
         </span>

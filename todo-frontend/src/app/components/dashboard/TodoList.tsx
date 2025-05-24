@@ -2,12 +2,14 @@ import deleteTodo from "@/app/networking/todo/deleteTodo";
 import React from "react";
 import Dropdown from "../atoms/dashboard/Dropdown";
 import putStatus from "@/app/networking/todo/putStatus";
+import { useMediaQuery } from "react-responsive";
 
 const TodoList: React.FC<{ todo: any; refreshTodo: Function }> = ({
   todo,
   refreshTodo,
 }) => {
-  console.log("111", todo);
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 600px)" });
+
   const options = ["In Progress", "Completed", "Pending"];
 
   const isAdmin = localStorage.getItem("isAdmin") || "false";
@@ -18,13 +20,11 @@ const TodoList: React.FC<{ todo: any; refreshTodo: Function }> = ({
   const handleChange = (value: string) => {
     setSelected(value);
     const data = putStatus(todo.id, value);
-    console.log("Selected value:", value);
   };
 
   const handleDelete = async () => {
     try {
       const data = await deleteTodo(todo.id);
-      console.log("Todo deleted:", data);
       if (data.deleted) {
         refreshTodo();
       }
@@ -34,7 +34,7 @@ const TodoList: React.FC<{ todo: any; refreshTodo: Function }> = ({
   };
   return (
     <tr className="hover:bg-gray-50">
-      <td className="p-3 border-b text-black">{todo.text}</td>
+      <td className={`p-3 border-b text-black whitespace-nowrap ${isSmallScreen?'max-w-[100px]':''} text-ellipsis overflow-hidden`}>{todo.text}</td>
       {(isAdmin == "true" || selected == "Completed") && (
         <td className="p-3 border-b text-yellow-600">{selected}</td>
       )}
