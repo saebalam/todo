@@ -7,8 +7,8 @@ import { useState } from "react";
 
 const Login = () => {
   const router = useRouter();
-  const [email, setEmail] = useState("test@gmail.com");
-  const [password, setPassword] = useState("password");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
