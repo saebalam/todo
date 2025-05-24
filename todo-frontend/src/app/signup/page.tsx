@@ -16,6 +16,8 @@ const Signup = () => {
     const data = await signup(username,email, password);
     if (data?.token) {
       localStorage.setItem("username", data.username);
+      localStorage.setItem("isAdmin", data.isAdmin);
+      localStorage.setItem("token", data.token);
       router.push("/");
     }
   };

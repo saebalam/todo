@@ -16,6 +16,7 @@ const Login = () => {
     localStorage.setItem("username", data.username);
     localStorage.setItem("isAdmin", data.isAdmin);
     if (data?.token) {
+      localStorage.setItem("token", data.token);
       router.push("/");
     }else{
       alert("Login failed. Please check your credentials.");

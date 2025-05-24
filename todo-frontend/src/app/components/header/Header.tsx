@@ -16,6 +16,7 @@ const Header = () => {
     }
     localStorage.removeItem("username");
     localStorage.removeItem("isAdmin");
+    localStorage.removeItem("token");
   };
 
   return (

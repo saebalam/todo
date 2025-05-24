@@ -39,7 +39,7 @@ const Dropdown: React.FC<DropdownProps> = ({ label, options, selected, onChange 
                 onChange(option);
                 setIsOpen(false);
               }}
-              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              className="text-nowrap px-4 py-2 hover:bg-gray-100 cursor-pointer"
             >
               {option}
             </li>
