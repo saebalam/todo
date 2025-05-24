@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://todo-production-1592.up.railway.app",
+    origin: "https://todo-app-0007.netlify.app/",
     credentials: true,
   })
 );
