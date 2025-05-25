@@ -77,7 +77,7 @@ const TodoDashboard: React.FC = () => {
       {loading && <p className="text-[22px] text-center mt-12">Loading...</p>}
 
       {!loading && todos.length === 0 && (
-        <p className="text-[22px] text-center mt-12">Start Adding Items</p>
+        <p className="text-[22px] text-center mt-12">{isAdmin == "false" ?'Start Adding Items' : 'No Items :('}</p>
       )}
 
       {!loading && todos.length > 0 && (
