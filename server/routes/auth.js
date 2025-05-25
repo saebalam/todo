@@ -1,6 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const pool = require("../db");
+const bcrypt = require("bcrypt");
 
 const authRouter = express.Router();
 
@@ -22,7 +23,9 @@ authRouter.post("/api/auth/login", async (req, res) => {
   }
 
   const user = rows[0];
-  if (user.password != password) {
+  const isCorrect = bcrypt.compareSync(password, user.password);
+
+  if (!isCorrect) {
     return res
       .status(401)
       .json({ message: "Invalid credentials", success: false });
@@ -47,7 +50,8 @@ authRouter.post("/api/auth/login", async (req, res) => {
 authRouter.post("/api/auth/signup", async (req, res) => {
   const { username, email, password } = req.body;
   if (username && email && password) {
-    const user_id = new Date(); // Current timestamp
+    const user_id = new Date(); 
+    
 
     const [rows] = await pool.query(
       "SELECT 1 FROM users WHERE email = ? LIMIT 1",
@@ -58,9 +62,12 @@ authRouter.post("/api/auth/signup", async (req, res) => {
       return res.status(401).json({ message: "Email Already Exists" });
     }
 
+    const hashedPassword = bcrypt.hashSync(password, 10);
+   
+
     const sql =
       "INSERT INTO users ( username,email, password) VALUES (?, ?, ?)";
-    const values = [username, email, password];
+    const values = [username, email, hashedPassword];
 
     const [result] = await pool.query(sql, values);
 
