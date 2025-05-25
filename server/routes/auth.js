@@ -64,6 +64,7 @@ authRouter.post("/api/auth/signup", async (req, res) => {
 
     const [result] = await pool.query(sql, values);
 
+
     const token = jwt.sign(
       { user_id: result.insertId },
       process.env.JWT_SECRET
@@ -71,7 +72,7 @@ authRouter.post("/api/auth/signup", async (req, res) => {
 
     res
       .cookie("token", token)
-      .json({ message: "sgnup success", token, username });
+      .json({ message: "sgnup success", token, username, isAdmin: false });
   } else {
   }
 });
