@@ -26,7 +26,7 @@ const Login = () => {
   return (
     <div className="p-4">
       <h1 className="text-center text-[32px]">Login</h1>
-      <form className="mt-6">
+      <form className="mt-6" onSubmit={handleLogin}>
         <div className="flex flex-col gap-4 max-w-[400px] mx-auto">
           <input
             type="email"
@@ -34,6 +34,7 @@ const Login = () => {
             className="p-2 border border-grey rounded-sm"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <input
             type="password"
@@ -41,10 +42,12 @@ const Login = () => {
             className="p-2 border border-grey rounded-sm"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            minLength={8}
+            required
           />
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded"
-            onClick={handleLogin}
+            type="submit"
           >
             Login
           </button>

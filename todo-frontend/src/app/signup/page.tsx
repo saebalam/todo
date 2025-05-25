@@ -27,7 +27,7 @@ const Signup = () => {
   return (
     <div className="p-4">
       <h1 className="text-center text-[32px]">Signup</h1>
-      <form className="mt-6" >
+      <form className="mt-6" onSubmit={handleSignup}>
         <div className="flex flex-col gap-4 max-w-[400px] mx-auto">
           <input
             type="text"
@@ -35,6 +35,7 @@ const Signup = () => {
             className="p-2 border border-grey rounded-sm"
             value={username}
             required
+            minLength={3}
             onChange={(e) => setUsername(e.target.value)}
           />
 
@@ -52,11 +53,12 @@ const Signup = () => {
             className="p-2 border border-grey rounded-sm"
             value={password}
             required
+            minLength={8}
             onChange={(e) => setPassword(e.target.value)}
           />
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded"
-            onClick={handleSignup}
+           type="submit"
           >
             Signup
           </button>
