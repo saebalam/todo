@@ -19,6 +19,8 @@ const Signup = () => {
       localStorage.setItem("isAdmin", data.isAdmin);
       localStorage.setItem("token", data.token);
       router.push("/");
+    }else{
+      alert(data?.message || "Signup failed. Please try again.");
     }
   };
 
