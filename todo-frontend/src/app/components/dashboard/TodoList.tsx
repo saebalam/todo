@@ -36,7 +36,7 @@ const TodoList: React.FC<{ todo: any; refreshTodo: Function }> = ({
     <tr className="hover:bg-gray-50">
       <td className={`p-3 border-b text-black whitespace-nowrap ${isSmallScreen?'max-w-[100px]':''} text-ellipsis overflow-hidden`}>{todo.text}</td>
       {(isAdmin == "true" || selected == "Completed") && (
-        <td className="p-3 border-b text-yellow-600">{selected}</td>
+        <td className={`p-3 border-b ${selected == 'Completed'? 'text-green-700':'text-yellow-600'}`}>{selected}</td>
       )}
       {isAdmin == "false" && selected != "Completed" && (
         <td className="p-3 border-b space-x-2">
